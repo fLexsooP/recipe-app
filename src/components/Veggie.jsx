@@ -54,7 +54,6 @@ function Veggie() {
           })}
         </Splide>
       </Wrapper>
-      ;
     </div>
   );
 }
