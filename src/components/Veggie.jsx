@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-
+import { Link } from 'react-router-dom';
 import { Wrapper, Card, Gradient } from './PopularCard';
 
 function Veggie() {
@@ -42,12 +42,14 @@ function Veggie() {
             return (
               <SplideSlide key={recipe.id}>
                 <Card>
-                  <p>{recipe.title}</p>
-                  <img
-                    src={recipe.image}
-                    alt={recipe.title}
-                  />
-                  <Gradient />
+                  <Link to={'/recipe/' + recipe.id}>
+                    <p>{recipe.title}</p>
+                    <img
+                      src={recipe.image}
+                      alt={recipe.title}
+                    />
+                    <Gradient />
+                  </Link>
                 </Card>
               </SplideSlide>
             );
