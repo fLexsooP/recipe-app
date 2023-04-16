@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
 
 function Search() {
   const [input, setInput] = useState('');
@@ -13,22 +14,31 @@ function Search() {
   };
 
   return (
-    <FormStyle onSubmit={submitHandler}>
-      <div>
-        <FaSearch></FaSearch>
-        <input
-          onChange={(e) => setInput(e.target.value)}
-          type="text"
-          value={input}
-          placeholder="search"
-        />
-      </div>
-    </FormStyle>
+    <Container>
+      <Row className="justify-content-sm-center">
+        <Col
+          sm
+          lg={6}
+        >
+          <FormStyle onSubmit={submitHandler}>
+            <div>
+              <FaSearch></FaSearch>
+              <input
+                onChange={(e) => setInput(e.target.value)}
+                type="text"
+                value={input}
+                placeholder="search"
+              />
+            </div>
+          </FormStyle>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
 const FormStyle = styled.form`
-  margin: 0rem 15rem;
+  /* margin: 0rem 15rem; */
   div {
     position: relative;
     width: 100%;

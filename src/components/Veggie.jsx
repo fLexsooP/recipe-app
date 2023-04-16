@@ -3,6 +3,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { Link } from 'react-router-dom';
 import { Wrapper, Card, Gradient } from './PopularCard';
+import { Container, Row, Col } from 'react-bootstrap';
 
 function Veggie() {
   const [veggie, setVeggie] = useState([]);
@@ -26,37 +27,51 @@ function Veggie() {
     }
   };
   return (
-    <div>
-      <Wrapper>
-        <h3>Vegetarian Picks</h3>
-        <Splide
-          options={{
-            perPage: 3,
-            arrows: false,
-            pagination: false,
-            drag: 'free',
-            gap: '5rem',
-          }}
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col
+          sm
+          lg={10}
         >
-          {veggie.map((recipe) => {
-            return (
-              <SplideSlide key={recipe.id}>
-                <Card>
-                  <Link to={'/recipe/' + recipe.id}>
-                    <p>{recipe.title}</p>
-                    <img
-                      src={recipe.image}
-                      alt={recipe.title}
-                    />
-                    <Gradient />
-                  </Link>
-                </Card>
-              </SplideSlide>
-            );
-          })}
-        </Splide>
-      </Wrapper>
-    </div>
+          <Wrapper>
+            <h3>Vegetarian Picks</h3>
+            <Splide
+              options={{
+                perPage: 3,
+                pagination: false,
+                drag: 'free',
+                gap: '5rem',
+                breakpoints: {
+                  1280: {
+                    perPage: 2,
+                  },
+                  840: {
+                    perPage: 1,
+                  },
+                },
+              }}
+            >
+              {veggie.map((recipe) => {
+                return (
+                  <SplideSlide key={recipe.id}>
+                    <Card>
+                      <Link to={'/recipe/' + recipe.id}>
+                        <p>{recipe.title}</p>
+                        <img
+                          src={recipe.image}
+                          alt={recipe.title}
+                        />
+                        <Gradient />
+                      </Link>
+                    </Card>
+                  </SplideSlide>
+                );
+              })}
+            </Splide>
+          </Wrapper>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
