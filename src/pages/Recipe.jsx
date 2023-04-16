@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-
+import { Container, Row, Col } from 'react-bootstrap';
 
 function Recipe() {
   let params = useParams();
@@ -26,47 +26,60 @@ function Recipe() {
   }, [params.name]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <DetailWrapper
-      animate={{ opacity: 1 }}
-      initial={{ opacity: 0 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div>
-        <h2>{details.title}</h2>
-        <img
-          src={details.image}
-          alt={details.title}
-        />
-      </div>
-      <Info>
-        <Button
-          className={activeTab === 'instructions' ? 'active' : ''}
-          onClick={() => setActiveTab('instructions')}
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col
+          sm
+          lg={10}
         >
-          Instructions
-        </Button>
-        <Button
-          className={activeTab === 'ingredients' ? 'active' : ''}
-          onClick={() => setActiveTab('ingredients')}
-        >
-          Ingredients
-        </Button>
-        {activeTab === 'instructions' && (
-          <div>
-            <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
-            <h3 dangerouslySetInnerHTML={{ __html: details.instructions }}></h3>
-          </div>
-        )}
-        {activeTab === 'ingredients' && (
-          <ul>
-            {details.extendedIngredients?.map((ingredient) => (
-              <li key={ingredient.id}>{ingredient.original}</li>
-            ))}
-          </ul>
-        )}
-      </Info>
-    </DetailWrapper>
+          <DetailWrapper
+            animate={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div>
+              <h2>{details.title}</h2>
+              <img
+                src={details.image}
+                alt={details.title}
+              />
+            </div>
+            <Info>
+              <Button
+                className={activeTab === 'instructions' ? 'active' : ''}
+                onClick={() => setActiveTab('instructions')}
+              >
+                Instructions
+              </Button>
+              <Button
+                className={activeTab === 'ingredients' ? 'active' : ''}
+                onClick={() => setActiveTab('ingredients')}
+              >
+                Ingredients
+              </Button>
+              {activeTab === 'instructions' && (
+                <div>
+                  <p
+                    dangerouslySetInnerHTML={{ __html: details.summary }}
+                  ></p>
+                  <p
+                    dangerouslySetInnerHTML={{ __html: details.instructions }}
+                  ></p>
+                </div>
+              )}
+              {activeTab === 'ingredients' && (
+                <ul>
+                  {details.extendedIngredients?.map((ingredient) => (
+                    <li key={ingredient.id}>{ingredient.original}</li>
+                  ))}
+                </ul>
+              )}
+            </Info>
+          </DetailWrapper>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
@@ -88,6 +101,9 @@ const DetailWrapper = styled(motion.div)`
   }
   ul {
     margin-top: 2rem;
+  }
+  p {
+    margin: 1rem 0;
   }
 `;
 
