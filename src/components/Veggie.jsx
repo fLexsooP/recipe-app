@@ -37,6 +37,8 @@ function Veggie() {
             <h3>Vegetarian Picks</h3>
             <Splide
               options={{
+                focus: 0,
+                perMove:1,
                 perPage: 3,
                 pagination: false,
                 drag: 'free',

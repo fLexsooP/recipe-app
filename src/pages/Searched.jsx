@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-
+import { Container, Row, Col } from 'react-bootstrap';
 
 function Searched() {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
@@ -21,26 +21,35 @@ function Searched() {
   }, [params.search]);
 
   return (
-    <Grid
-      animate={{ opacity: 1 }}
-      initial={{ opacity: 0 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-    >
-      {searchedRecipes.map((item) => {
-        return (
-          <Card key={item.id}>
-            <Link to={'/recipe/' + item.id}>
-              <img
-                src={item.image}
-                alt={item.title}
-              />
-              <h4>{item.title}</h4>
-            </Link>
-          </Card>
-        );
-      })}
-    </Grid>
+    <Container>
+      <Row className="justify-content-md-center">
+        <Col
+          sm
+          lg={10}
+        >
+          <Grid
+            animate={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {searchedRecipes.map((item) => {
+              return (
+                <Card key={item.id}>
+                  <Link to={'/recipe/' + item.id}>
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                    />
+                    <h4>{item.title}</h4>
+                  </Link>
+                </Card>
+              );
+            })}
+          </Grid>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
